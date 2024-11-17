@@ -9,6 +9,7 @@ Features:
 -Responsive design for mobile and desktop
 
 Technologies:
+-Python
 -Django
 -HTML/CSS (Bootstrap)
 -JavaScript (jQuery)
@@ -20,4 +21,3 @@ How to Run:
 4-Run the development server: python manage.py runserver
 5-Access the site at localhost:8000
 
-Feel free to fork, modify, and contribute!
