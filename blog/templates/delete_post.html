@@ -1,0 +1,30 @@
+{% extends 'blog_base.html' %}
+
+
+{% block content %}
+
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Delete Post</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Read Cool Stuff</p>
+                </div>
+            </div>
+        </header>
+      </div>
+      
+        	
+<div class="card mb-3">
+    <div class="row g-0"  style="margin: 20px;">
+        <div class="col-md-4">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <strong>Are You Sure You Want To Delete This Post?</strong>
+                <br><br>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

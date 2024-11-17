@@ -1,0 +1,129 @@
+{% extends 'blog_base.html' %}
+
+{% load hitcount_tags %}
+{% block content %}
+
+      <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <!-- Post content-->
+                <article>
+                    <!-- Post header-->
+                    <header class="mb-4">
+                        <!-- Post title-->
+                        <h1 class="fw-bolder mb-1" style="font-family: 'Vazir';">{{ post.title }}</h1>
+                        <!-- Post meta content-->
+                        <div class="text-muted fst-italic mb-2">پست شده در {{ post.date_created }}  توسط {{ post.author }} | <i class="fa-regular fa-eye">   {% get_hit_count for post %} | {{ post.visit }}</i></div>
+                        <!-- Post categories-->
+                        <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'blog_category' post.category %}">{{ post.category }}</a>
+                    </header>
+                    <!-- Preview image figure-->
+                    <figure class="mb-4"><img class="img-fluid rounded" style="height: 400px; width: 900px;" src="{{ post.image.url }}" alt="..." /></figure>
+                    <!-- Post content-->
+                    <section class="mb-5" style="font-family: 'Vazir';">
+                        <p style="font-family: 'Vazir';">{{ post.body | safe }}</p>
+                    </section>
+
+                    <a href="{% url 'blog' %}" class="btn btn-secondary">بازگشت</a>
+
+                    {% if user.is_authenticated %}
+                        {% if user.id == post.author.id %}
+                            <a href="{% url 'edit_post' post.pk %}" class="btn btn-primary">ویرایش</a>
+                            <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger">حذف</a>
+                            <br><br>
+                            
+                        {% endif %}
+                        <form action="{% url 'like_post' post.pk %}" method="POST">
+                            {% csrf_token %}
+                            <br>
+                            {% if liked %}
+                            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">نپسندیدن - {{ total_likes }}</button>
+                            {% else %}
+                            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-success btn-sm">پسندیدن - {{ total_likes }}</button>
+                            {% endif %}
+                        </form>
+                    {% else %}
+                    برای لایک و کامنت وارد شوید
+                    {% endif %}
+                    <br><br>
+                </article>
+                <!-- Comments section-->
+                <section class="mb-5">
+                    <h2 style="font-family: 'Vazir';">کامنت ها ({{ comment_count }})</h2>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <!-- Comment form-->
+                            {% if user.is_authenticated %}
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    {{ form }}
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary">ارسال</button>
+                            </form>
+
+                            {% else %}
+                            <p>لطفا برای نظر دادن وارد شوید</p>
+                            {% endif %}
+                            <br><hr>
+                            <!-- Single comment-->
+                            {% for comment in post_comments %}
+                            <div class="d-flex">
+                                <div class="flex-shrink-0"><img class="rounded-circle" src="{{ comment.user.profile.profile_pic.url }}" alt="https://dummyimage.com/50x50/ced4da/6c757d.jpg" style="height: 50px; width: 50px;" /></div>
+                                <div class="ms-3">
+                                    <div class="fw-bold">{{ comment.user }}</div>
+                                    {{ comment.content }}
+                                    <br>
+                                    <time class="ml-4 opacity-70 small-3" style="color: gray; font-size: small;">{{ comment.date_added }}</time>
+                                </div>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Side widgets-->
+            <div class="col-lg-4">
+                <!-- Search widget-->
+                <div class="card mb-4">
+                    <div class="card-header">جستوجو</div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="جستوجو کنید" aria-label="Enter search term..." aria-describedby="button-search" />
+                            <button class="btn btn-primary" id="button-search" type="button">برو</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">دسته بندی ها</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">گیاهان</a></li>
+                                    <li><a href="#!">فرهنگی</a></li>
+                                    <li><a href="#!">جانوران</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">اجتماعی</a></li>
+                                    <li><a href="#!">سیاسی</a></li>
+                                    <li><a href="#!">موسیقی</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">سقراط</div>
+                    <div class="card-body">هیچ فردی حق ندارد در زمینه تمرینات ورزشی آماتور باشد . باعث شرم و خجالت است که فردی بدون دیدن قدرت و زیبایی ای که بدنش توانایی رسیدن به آن را دارد ٬  پیر شود .</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

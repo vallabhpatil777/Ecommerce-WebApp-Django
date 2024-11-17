@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> HEADER | E-COMMERCE WEBSITE </title>
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <!-- EXTERNAL LINKS -->
+    
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<style>
+@font-face {
+	font-family: vazir;
+	font-style: normal;
+	font-weight: 100;
+	src: url("fonts/Vazir-Thin.eot");
+	src: url("fonts/Vazir-Thin.woff") format("woff"),
+	  url("fonts/Vazir-Thin.ttf") format("ttf"),
+	  url("fonts/Vazir-Thin.woff2") format("woff2");
+  }
+  @font-face {
+	font-family: vazir;
+	font-style: normal;
+	font-weight: 300;
+	src: url("fonts/Vazir-Light.eot");
+	src: url("fonts/Vazir-Light.woff") format("woff"),
+	  url("fonts/Vazir-Light.ttf") format("ttf"),
+	  url("fonts/Vazir-Light.woff2") format("woff2");
+  }
+  
+  @font-face {
+	font-family: vazir;
+	font-style: normal;
+	font-weight: 400;
+	src: url("fonts/Vazir-Regular.eot");
+	src: url("fonts/Vazir-Regular.woff") format("woff"),
+	  url("fonts/Vazir-Regular.ttf") format("ttf"),
+	  url("fonts/Vazir-Regular.woff2") format("woff2");
+  }
+  @font-face {
+	font-family: 'vazir';
+	font-style: normal;
+	font-weight: 950;
+	src: url("fonts/Vazir-Black.eot");
+	src: url("fonts/Vazir-Black.woff") format("woff"),
+	  url("fonts/Vazir-Black.ttf") format("ttf"),
+	  url("fonts/Vazir-Black.woff2") format("woff2");
+  }
+    body
+{
+    margin: 0;
+}
+#badge
+{
+    position: absolute;
+    background-color: rgb(255, 30, 30);
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 14px;
+    top: 10px;
+    left:158px;
+}
+#container
+{
+    background-color: white;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 4fr 1.5fr 1.5fr;
+    font-family: 'Vazir', sans-serif;
+    z-index: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    position: fixed;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149); 
+}
+#shopName 
+{
+    font-size: 40px; 
+    font-family: 'Vazir', sans-serif;
+}
+#shopName a
+{
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
+#shopName > b
+{
+    font-weight: 900;
+    font: black;
+}
+
+#collection
+{
+    font-weight: bold;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+#collection a
+{
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
+
+.search
+{
+    padding: 14px;
+    /* color: gray; */
+    color: rgb(29, 29, 29);
+    min-width: 25px;
+    text-align: center;
+    position: absolute;
+}
+
+.addedToCart
+{
+    font-size: 1.5em;
+    margin-right: 25px;
+}
+
+#cart a:hover {
+    color: #ddd;
+}
+#user
+{
+    display: flex;
+    /* float: right; */
+    align-items: center;
+    justify-items: space-between;
+}
+
+.userIcon
+{
+    font-size: 45px;
+}
+#input 
+{
+    width: 35em;
+    height: 3em;
+    padding: 2px 50px;
+    background-color: rgb(241, 241, 241);
+    border: none;
+    border-radius: 5px;
+}
+#input::placeholder
+{
+    font-weight: bold;
+}
+#input:focus
+{
+    outline: none;
+}
+
+
+
+
+
+
+
+.icon {
+    display: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.userIcon {
+  cursor: pointer;
+  background-color: #f2f2f2;
+  padding: 5px 10px;
+  border-radius: 50%;
+  color: black;
+}
+
+.userIcon:hover {
+  background-color: #ddd;
+  
+}
+
+
+#dropdownMenu {
+  position: absolute;
+  background-color: white;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 8px 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .dropdown:hover #dropdownMenu {
+    display: block;
+  }
+}
+
+
+
+
+@media screen and (max-width: 1000px)
+{
+    #container {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 90px;
+    }
+
+    #collection
+    {
+        font-size: 13px;
+        display: none;
+    }
+
+    #search {display: none;}
+}
+
+
+</style>
+<body>
+    <header>
+        <section>
+            
+            <!-- MAIN CONTAINER -->
+            <div class="topnav" id="container" style="direction: rtl;">
+                <!-- SHOP NAME -->
+                <div id="shopName"> <a href="{% url 'home' %}"><b>بلاگی</b></a></div>
+                    <!-- COLLCETIONS ON WEBSITE -->
+                    <div id="collection">
+                        <div id="clothing"><a href="{% url 'blog' %}"> خانه </a></div>
+                        
+                        <div id="accessories"><a href="{% url 'add_post' %}"> ایجاد پست </a></div>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              دسته بندی ها
+                            </a>
+                          
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">{{ cat }}</a></li>
+                              {% for cat in blog_categories %}
+                                <li><a class="dropdown-item" href="{% url 'blog_category' cat %}">{{ cat }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% if user.is_authenticated %}
+                            
+                            <div id="accessories"><a href="{% url 'logout' %}"> خروج </a></div>
+                        {% else %}
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" href="{% url 'login' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ورود
+                              </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'login' %}">ورود</a></li>
+                                <li><a class="dropdown-item" href="{% url 'register' %}">ثبت نام</a></li>  
+                            </ul>
+                        </div>
+                        {% endif %}
+                          <div id="accessories"><a href="{% url 'about' %}"> درباره ما </a></div>
+                        
+                    </div>
+                    <div id="search">
+                        <form class="d-flex" role="search" method="POST" action="{% url 'search_blog' %}">
+                            {% csrf_token %}
+                            
+                            <input class="form-control me-2" type="search" placeholder="جستوجوی محصول موردنظر" aria-label="Search" name="postsearched" style="width: 300px;">&nbsp;&nbsp;
+                            <button class="btn btn-outline-success" type="submit" style="height: 40px;">جستوجو</button>
+                        </form>
+                    </div>
+                    <div id="user">
+                        <a href="{% url 'home' %}" class="btn btn-outline-dark" id="cart"><i class="bi-cart-fill me-1"></i>
+                            فروشگاه
+                        </a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="dropdown">
+                            {% if user.is_authenticated %}
+                                {% if user.profile.profile_pic %}
+                                    <a href="{% url 'profile' user.profile.id  %}"><img src="{{ user.profile.profile_pic.url }}" class="rounded-circle" style="height: 50px; width: 50px;" alt="..."></a>
+                                {% else %}
+                                    <a href="{% url 'profile' user.profile.id %}"><i class="fas fa-user-circle userIcon" style="pointer-events: none; background-color: white;"></i></a>
+                                {% endif %}
+                                
+                                <div class="dropdown-menu" id="dropdownMenu" style="direction: rtl;">
+                                    <a class="dropdown-item" href="{% url 'profile' user.profile.id  %}" style="direction: rtl;">پروفایل</a>
+                                    <a class="dropdown-item" href="{% url 'blog' %}">بلاگ</a>
+                                    <a class="dropdown-item" href="{% url 'about' %}">درباره ما</a>
+                                    <a class="dropdown-item" href="{% url 'logout' %}">خروج</a>
+                                </div>
+
+                            {% else %}
+                                <i class="fas fa-user-circle userIcon" style="pointer-events: none; background-color: white;"></i>
+                                <div class="dropdown-menu" id="dropdownMenu">   
+                                    <a class="dropdown-item" href="{% url 'blog' %}">بلاگ</a> 
+                                      <a class="dropdown-item" href="{% url 'login' %}">ورود</a>
+                                      <a class="dropdown-item" href="{% url 'register' %}">ثبت نام</a>
+                                      <a class="dropdown-item" href="{% url 'about' %}">درباره ما</a>
+                                      <a class="dropdown-item" href="#"><form class="d-flex" role="search" method="POST" action="{% url 'search_blog' %}">
+                                        {% csrf_token %}
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="postsearched">
+                                    </form></a>
+                                </div>
+                            {% endif %}
+                        </div>
+            </div>
+        </section>
+    </header>
+
+    <script>
+        // Get the dropdown menu
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Add click event listener to the user icon
+        const userIcon = document.querySelector('.userIcon');
+        userIcon.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+        });
+
+        // Add close event listener to the document
+        document.addEventListener('click', (event) => {
+        if (!dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+        });
+    </script>
+
+</body>
+</html>
