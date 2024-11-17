@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Header-->
+
+</header>
+
+<div class="container">
+    <div class="row">
+        <center>
+            <div class="col-md-5">
+                <br><br>
+                <form method="post" action="{% url 'edit_user' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        
+                        {% render_field form.first_name class="form-control" placeholder="نام" type="text" %}
+                      </div>
+                      <br>
+                      <div class="form-group">
+                       {% render_field form.last_name type="text" class="form-control" placeholder="نام خانوادگی" %}
+                     </div>
+                     <br>
+                     <div class="form-group">
+                        
+                       {% render_field form.username type="text" class="form-control" id="exampleInputUsername" placeholder="نام کاربری" %}
+                     </div>
+                     <br>
+                     <div class="form-group">
+                        
+                        {% render_field form.email type="text" class="form-control" id="exampleInputUsername" placeholder="ایمیل " %}
+                      </div>
+                      <br>
+                     <div>
+                        <p style="font-family: 'Vazir';">برای تغییر رمز عبور <a href="{% url 'change_password' user.id %}">کلیک</a> کنید </p>
+                     </div>
+                      <br>
+                    <div>
+                        <button type="submit" class="btn btn-secondary">ثبت تغییرات</button>
+                    </div>
+                </form>
+                
+                    
+            </div>
+            <br><br>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پنل ادمین</title>
+    <style>
+        body {
+            direction: rtl;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+        }
+
+        #side-menu {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh;
+        }
+
+        #admin-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 15px;
+        }
+
+        #admin-picture img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #admin-name {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 1cm;
+            position: relative;
+        }
+
+        #admin-name::after {
+            content: "";
+            display: block;
+            height: 1px;
+            background-color: #fff;
+            margin-top: 1cm;
+        }
+
+        .side-menu-links {
+            margin-top: 1cm;
+            list-style: none;
+            padding: 0;
+        }
+
+        .side-menu-links li {
+            margin-bottom: 10px;
+        }
+
+        .side-menu-links a {
+            font-family: 'Vazir';
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            display: block;
+            padding: 20px;
+            transition: 0.5s;
+        }
+
+        .side-menu-links a:hover {
+            background-color: #787878;
+        }
+
+        #content {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+}
+
+#content div {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+#content div:nth-child(2) {
+    background-color: #e0e0e0;
+}
+
+#content div:nth-child(3) {
+    background-color: #d1d1d1;
+}
+
+#content p {
+    font-family: 'Vazir';
+    font-size: 18px;
+    margin: 0;
+}
+
+#content h3 {
+    font-family: 'Vazir';
+}
+
+#content h2 {
+    font-family: 'Vazir';
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#content .column {
+    background-color: #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#content .column:nth-child(2) {
+    background-color: #ccc;
+}
+
+#content .column:nth-child(3) {
+    background-color: #bbb;
+}
+
+#content .column:nth-child(4) {
+    background-color: #aaa;
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <div id="side-menu">
+        <div id="admin-picture">
+            <img src="{{ user.profile.profile_pic.url }}" alt="Admin Avatar">
+        </div>
+        <div id="admin-name">{{ user.username}}</div>
+        <ul class="side-menu-links">
+            <li><a href="{% url 'home' %}">خانه</a></li>
+            <li><a href="{% url 'profile' user.id %}">پروفایل</a></li>
+            <li><a href="{% url 'admin:index' %}">تنظیمات</a></li>
+            <li><a href="{% url 'logout' %}">خزوج</a></li>
+            <li><a href="#">کیک</a></li>
+        </ul>
+        <hr>
+        <div>
+            <p>شاد باشید</p>
+        </div>
+    </div>
+
+    <div id="content">
+        <div>
+            <h2>کاربران</h2>
+            <div class="column">
+                <h3>کل کاربران</h3>
+                <p>تعداد کل کاربران برابر است با:</p>
+                <p>{{ total_users }}</p>
+            </div>
+            <div class="column">
+                <h3>کاربران ادمین</h3>
+                <p>تعداد کل کاربران ادمین :</p>
+                <p>{{ admin_users }}</p>
+            </div>
+            <div class="column">
+                <h3>ثبت نامی های امروز</h3>
+                <p>{{ users_today }}</p>
+            </div>
+            
+        </div>
+        <div>
+            <h2>محصولات</h2>
+            <div class="column">
+                <h3>کل محصولات</h3>
+                <p>{{ total_products }}</p>
+            </div>
+            <div class="column">
+                <h3>بیشترین بازدید</h3>
+                <img src="{{ most_visited.image.url }}" alt="" style="height: 150px; width: 150px;">
+                <p>{{ most_visited.is_visited }} بازدید</p>
+                <p style="font-family: 'Vazir';">{{ most_visited.name }}</p>   
+            </div>
+            <div class="column">
+                <h3>بیشترین کامنت</h3>
+                <img src="{{ most_commented_products.image.url }}" alt="" style="height: 150px; width: 150px;">
+                <p>{{ comment_count }} کامنت</p>
+                <p style="font-family: 'Vazir';" >{{ most_commented_products.name }}</p>
+                
+            </div>
+            
+        </div>
+
+</body>
+</html>

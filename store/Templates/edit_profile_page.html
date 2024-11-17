@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  .edit-profile {
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.edit-profile h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-profile label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.edit-profile textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none; 
+}
+
+.edit-profile input[type="file"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-profile input[type="url"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.edit-profile button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+
+
+<!-- Header-->
+
+</header>
+    <div class="container">
+        <div class="main-body">
+          
+           <div class="row">
+                <div class="col-md-12">"
+                  <div class="card" style="background-image: url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-repeat: repeat"  ;>
+                    <div class="card-body justify-content-between">
+                      <div class="d-flex align-items-center text-center center">
+                        <div class="edit-profile"  style="background-color: #a8bacd; font-family: Vazir;">
+                          <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <center>
+                              {{ form.as_p }}
+                            </center>
+                            <button type="submit" class="btn btn-secondary">ثبت تغییرات</button>
+                            
+                        </form>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+          
+{% endblock %}

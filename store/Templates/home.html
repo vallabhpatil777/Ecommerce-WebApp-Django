@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+        <!-- Header-->
+        
+        <br>
+        <nav class="navbar bg-body-tertiary" style="direction: rtl;">
+            <div class="container-fluid">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <li class="filters"><i class="fa-solid fa-sort"></i>  مرتب سازی :</li>
+                    </li>
+                    <li class="nav-item">
+                        <li class="filters"><a class="filter_by" href="?sort=l2h" style="text-decoration: none; color: black;">قیمت از کم به زیاد</a></li>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <li class="filters"><a class="filter_by" href="?sort=h2l" style="text-decoration: none; color: black;">قیمت از زیاد به کم</a></li>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <li class="filters"><a class="filter_by" href="?sort=mv" style="text-decoration: none; color: black;">بیشترین بازدید</a></li>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <li class="filters"><a class="filter_by" href="?sort=lv" style="text-decoration: none; color: black;">کمترین بازدید</a></li>
+                    </li>
+                  </ul> 
+                  
+              <form class="d-flex" role="search" method="POST" action="{% url 'search_stuff' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="محصول مورد نظر را چستوجو کنید..." aria-label="Search" name="searched" style="width: 8cm;">
+                <button class="btn btn-outline-success" type="submit">جستوجو</button>
+              </form>
+            </div>
+          </nav>
+         
+        
+          <hr>
+       
+        
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5" style="direction: rtl;">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+                    {% for product in page_obj %}
+                        {% if product.on_sale %}
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Sale badge-->
+                                <div class="badge bg-light position-absolute" style="top: 0.5rem; right: 0.5rem; color: red;">فروش ویژه</div>
+                                <!-- Product image-->
+                                <img class="card-img-top" src="{{ product.image.url }}" alt="..." style="max-height: 250px;" />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder" style="font-family: 'Vazir';">{{ product.name }}</h5>
+                                        <!-- Product price-->
+                                        <strike>${{ product.price }}</strike>
+                                        &nbsp;
+                                        ${{ product.sale_price }}
+                                        
+                                        <br>
+                                        <!-- {{ product.is_visited }}    -->
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">مشاهده محصول</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                            <div class="col mb-5">
+                                <div class="card h-100">
+                                    <!-- Product image-->
+                                    {% if product.image %}
+                                        <img class="card-img-top" src="{{ product.image.url }}" alt="..." style="max-height: 250px;"/>
+                                    {% endif %}
+                                    <!-- Product details-->
+                                    <div class="card-body p-4">
+                                        <div class="text-center">
+                                            <!-- Product name-->
+                                            <h5 class="fw-bolder" style="font-family: 'Vazir';">{{ product.name }}</h5>
+                                            <!-- Product price-->
+                                            ${{ product.price }}
+                                            <br>
+                                            <!-- {{ product.is_visited }}   -->
+                                        </div>
+                                    </div>
+                                    <!-- Product actions-->
+                                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">مشاهده محصول</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" >
+                    {% if page_obj.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
+                        <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                    {% endif %}
+                    <li class="page-item disabled">
+                        <a class="page-link">{{ page_obj.number }}</a>
+                      </li>
+                    {% if page_obj.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">بعدی</a></li>
+                    {% endif %}
+                </ul>
+              </nav>
+            
+        </section>
+        
+        {% endblock %}
+    </body>
+
+    
+</html>

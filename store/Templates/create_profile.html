@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Header-->
+
+    <div class="container">
+        <div class="main-body">
+              <!-- Breadcrumb -->
+              <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="home.html">خانه</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">پروفایل کاربر</li>
+                </ol>
+              </nav>
+              <!-- /Breadcrumb -->
+        
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-body justify-content-between">
+                      <div class="d-flex align-items-center text-center center">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <center>
+                                
+                                {{ form.as_p }}
+                            </center>
+                            <button type="submit" class="btn btn-secondary">ثبت تغییرات</button>
+                        </form>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+{% endblock %}

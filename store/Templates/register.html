@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<!-- Header-->
+
+
+<div class="container">
+    <div class="row">
+        <center>
+            <div class="col-md-5">
+                <br><br>
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        
+                        {% render_field form.username class="form-control" placeholder="نام کاربری" type="text" %}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        
+                        {% render_field form.email class="form-control" placeholder="ایمیل " type="text" %}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        
+                        {% render_field form.first_name class="form-control" placeholder="نام" type="text" %}
+                      </div>
+                      <br>
+                      <div class="form-group">
+                       {% render_field form.last_name type="text" class="form-control" placeholder="نام خانوادگی" %}
+                     </div>
+                     <br>
+                     <div class="form-group">
+                        
+                        {% render_field form.password1 class="form-control" placeholder="رمز عبور" type="password" %}
+                      </div>
+                      <br>
+                      <div class="form-group">
+                       {% render_field form.password2 type="password" class="form-control" placeholder="تایید رمز عبور " %}
+                     </div>
+                     <br>
+                    <button type="submit" class="btn btn-secondary">ثبت نام</button>
+                    
+            </div>
+            <br><br>
+        </center>
+    </div>
+</div>
+
+{% endblock %}

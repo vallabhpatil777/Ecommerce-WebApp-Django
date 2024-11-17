@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+        <!-- Header-->
+        
+        <!-- Section-->
+        <div class="container">
+            <div class="row">
+                <center>
+                    <div class="col-8">
+                        {% for cat in categories %}
+                            <a href="{% url 'category' cat=cat %}" style="text-decoration: none;">{{ cat.name }}</a>
+                            <br>
+                        {% endfor %}
+                    </div>
+                </center>
+            </div>
+        </div>
+
+        {% endblock %}
+    </body>
+</html>

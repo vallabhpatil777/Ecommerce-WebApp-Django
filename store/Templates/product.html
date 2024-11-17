@@ -1,0 +1,445 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  /* Basic Styling */
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+ 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+}
+
+.left-column {
+  width: 65%;
+  position: relative;
+}
+ 
+.right-column {
+  width: 35%;
+  margin-top: 60px;
+}
+
+.left-column img {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+ 
+/* .left-column img.active {
+  opacity: 1;
+} */
+
+.product-description {
+  border-bottom: 1px solid #E1E8EE;
+  margin-bottom: 20px;
+}
+.product-description span {
+  font-size: 12px;
+  color: #358ED7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.product-description h1 {
+  font-weight: 300;
+  font-size: 52px;
+  color: #43484D;
+  letter-spacing: -2px;
+}
+.product-description p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #86939E;
+  line-height: 24px;
+}
+
+.product-color {
+  margin-bottom: 30px;
+}
+ 
+.color-choose div {
+  display: inline-block;
+}
+ 
+.color-choose input[type="radio"] {
+  display: none;
+}
+ 
+.color-choose input[type="radio"] + label span {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.33);
+}
+ 
+.color-choose input[type="radio"]#red + label span {
+  background-color: #C91524;
+}
+.color-choose input[type="radio"]#blue + label span {
+  background-color: #314780;
+}
+.color-choose input[type="radio"]#black + label span {
+  background-color: #323232;
+}
+ 
+.color-choose input[type="radio"]:checked + label span {
+  background-image: url(images/check-icn.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.cable-choose {
+  margin-bottom: 20px;
+}
+ 
+.cable-choose button {
+  border: 2px solid #E1E8EE;
+  border-radius: 6px;
+  padding: 13px 20px;
+  font-size: 14px;
+  color: #5E6977;
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .5s;
+}
+ 
+.cable-choose button:hover,
+.cable-choose button:active,
+.cable-choose button:focus {
+  border: 2px solid #86939E;
+  outline: none;
+}
+ 
+.cable-config {
+  border-bottom: 1px solid #E1E8EE;
+  margin-bottom: 20px;
+}
+ 
+.cable-config a {
+  color: #358ED7;
+  text-decoration: none;
+  font-size: 12px;
+  position: relative;
+  margin: 10px 0;
+  display: inline-block;
+}
+ 
+.cable-config a:before {
+  content: "?";
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(53, 142, 215, 0.5);
+  display: inline-block;
+  text-align: center;
+  line-height: 16px;
+  opacity: 0.5;
+  margin-right: 5px;
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+}
+ 
+.product-price span {
+  font-size: 26px;
+  font-weight: 300;
+  color: #43474D;
+  margin-right: 20px;
+}
+ 
+.cart-btn {
+  display: inline-block;
+  background-color: #7DC855;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 12px 30px;
+  transition: all .5s;
+}
+.cart-btn:hover {
+  background-color: #64af3d;
+}
+
+@media (max-width: 940px) {
+  .container {
+    flex-direction: column;
+    margin-top: 60px;
+  }
+ 
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
+ 
+  .left-column img {
+    width: 300px;
+    right: 0;
+    top: -65px;
+    left: initial;
+  }
+}
+ 
+@media (max-width: 535px) {
+  .left-column img {
+    width: 220px;
+    top: -85px;
+  }
+}
+</style>
+<!-- <header class="bg-dark py-1">
+  <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Shop in style</h1>
+          <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+      </div>
+  </div>
+</header>
+<div class="container">
+<br/>
+
+
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <center>
+        <h5 class="card-title">{{ product.name }}</h5>
+        <br/>
+        <p class="card-text justified">{{ product.description }}</p>
+        
+        <br>
+        {% if product.is_sale %}
+        <div class="d-flex justify-content-center small text-warning mb-2">
+                <div class="bi-star-fill"></div>
+                &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+                <div class="bi-star-fill"></div>
+                </div>
+
+                Product price
+                <strike>
+                ${{ product.price }}
+                </strike>
+                &nbsp;
+                ${{ product.sale_price }}
+
+
+
+        {% else %}
+            ${{ product.price }}
+            
+        {% endif %}
+        {% if messages %}
+            {% for msg in messages %}
+
+                {% if msg is success %}
+                <div class="alert alert-custom  alert-dismissible fade show" role="alert">
+                    <strong>{{ msg }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+            <br/><br/>
+<div class="row justify-content-center">
+    <div class="col-md-2">Quantity:</div>
+                <div class="col-md-2">
+                <select class="form-select form-select-sm" id="qty-cart">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                </div>
+            </div>
+            <br/><br/>
+        <a href="{% url 'home'%}" class="btn btn-secondary">Home</a>
+        {% if user.is_authenticated %}
+          <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add To Cart</button>
+        {% else %}
+          <p>please register to purchase</p>
+          <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+
+    </center>
+      </div>
+    </div>
+  </div>
+</div>
+</div> -->
+
+<main class="container">
+ 
+  <!-- Left Column / Product Image -->
+  <!-- <div class="left-column">
+    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+  </div> -->
+
+  <div class="col-md-4" style="width: 65%;">
+    <br><br><br>
+    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="..." style="width: 90%; max-height: 450px;">
+  </div>
+ 
+ 
+  <!-- Right Column -->
+  <div class="right-column" style="font-family: 'Vazir';">
+ 
+    <!-- Product Description -->
+    <div class="product-description">
+      <span>{{ product.Category }}</span>
+      <h1  style="font-family: 'Vazir';">{{ product.name }}</h1>
+      <p  style="font-family: 'Vazir';">{{ product.description }}</p>
+    </div>
+ 
+    <!-- Product Configuration -->
+    <div class="product-configuration">
+ 
+      <!-- Cable Configuration -->
+      <div class="cable-config">
+        <span>روش های پرداخت</span>
+ 
+        <div class="cable-choose">
+          <button>اسنپ پی</button>
+          <button>کارت اعتباری</button>
+          <button>رمز ارز</button>
+        </div>
+ 
+        <a href="#">چگونه پرداخت کنید</a>
+      </div>
+    </div>
+    <div class="cable-config">
+      <div class="row justify-content-center">
+        <div class="col-md-2" style="font-family: 'Vazir';">تعداد :</div>
+                  <div class="col-md">
+                  <select class="form-select form-select" id="qty-cart">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                  </div>
+              </div>
+              <br>
+              </div>
+              
+ 
+    <!-- Product Pricing -->
+    
+    <div class="product-price">
+      {% if product.on_sale %}
+      <strike>
+        ${{ product.price }}
+      </strike>&nbsp
+      <span>{{ product.sale_price }}$</span>
+      {% else %}
+      <span>{{ product.price }} $</span>
+      {% endif %}
+        {% if user.is_authenticated %}
+        &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" value="{{ product.id }}" class="cart-btn" id="add-cart" style="border: none;">افزودن به سبد خرید</button>
+        {% else %}
+        
+          <p  style="font-family: 'Vazir';">لطفا <a href="{% url 'register' %}">ثبت نام</a>/<a href="{% url 'login' %}">ورود</a> کنید برای خرید </p>
+          
+        {% endif %}
+    </div>
+  </div>
+</main>
+<!-- Comments section-->
+<section class="mb-5" style="padding: 20px;">
+  <h2>کامنت ها({{ comment_count }})</h2>
+  <div class="card bg-light">
+      <div class="card-body">
+          <!-- Comment form-->
+          {% if user.is_authenticated %}
+          <form method="POST" action="">
+              {% csrf_token %}
+              <div class="form-group">
+                  {{ form.as_p }}
+              </div>
+              <br>
+              <button type="submit" class="btn btn-secondary">افزودن کامنت</button>
+          </form>
+
+          {% else %}
+          <p>لطفا وارد شوید</p>
+          {% endif %}
+          <br><hr>
+          <!-- Single comment-->
+          {% for comment in product_comments %}
+          <div class="d-flex">
+              <div class="flex-shrink-0"><img class="rounded-circle" src="{{ comment.user.profile.profile_pic.url }}" alt="https://dummyimage.com/50x50/ced4da/6c757d.jpg" style="height: 50px; width: 50px;" /></div>
+              <div class="ms-3">
+                  <div class="fw-bold">{{ comment.user }}</div>
+                  {{ comment.content }}
+                  <br>
+                  <time class="ml-4 opacity-70 small-3" style="color: gray; font-size: small;">{{ comment.date_added }}</time>
+              </div>
+          </div>
+          <hr>
+          {% endfor %}
+      </div>
+  </div>
+</section>
+        	
+
+<br/><br/><br/><br/><br/><br>
+
+<script>
+// Check if button pressed
+$(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_add' %}',
+        data: {
+    product_id: $('#add-cart').val(),
+    product_qty: $('#qty-cart option:selected').text(),
+    csrfmiddlewaretoken: '{{ csrf_token }}',
+    action: 'post'
+        },
+
+        success: function(json){
+            //console.log(json)
+            document.getElementById("badge").textContent = json.qty
+            location.reload()
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+
+
+    });
+
+
+
+})
+
+</script>
+
+
+{% endblock %}
